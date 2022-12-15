@@ -7,7 +7,10 @@
  * @param preference The preference to change.
  * @param value The new value.
  */
-declare function user_pref(preference: string, value: string | boolean | number): void;
+declare function user_pref(
+  preference: string,
+  value: string | boolean | number,
+): void;
 
 /** [SECTION 1]: Privacy **/
 /* Internal browser behavior. */
@@ -41,12 +44,19 @@ user_pref("messaging-system.rsexperimentloader.enabled", false);
 user_pref("browser.aboutHomeSnippets.updateUrl", false);
 
 // Disable Firefox "network detection," which sends a ping to its detectportal domain.
-user_pref("network.captive-portal-service.enabled", false)
+user_pref("network.captive-portal-service.enabled", false);
 user_pref("network.connectivity-service.enabled", false);
+
+// Do not send crash reports.
+user_pref("breakpad.reportURL", "");
+user_pref("browser.tabs.crashReporting.sendReport", false);
 
 /* Geolocation & Region */
 // Use Mozilla geolocation service if permission is granted.
-user_pref("geo.provider.network.url", "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%");
+user_pref(
+  "geo.provider.network.url",
+  "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%",
+);
 user_pref("geo.provider.use_geoclue", false);
 /// Disable OS geolocation when the user uses Windows.
 user_pref("geo.provider.ms-windows-location", false);
@@ -69,7 +79,8 @@ user_pref("dom.security.https_only_mode", true);
 user_pref("dom.security.https_only_mode_pbm", true);
 
 // Enforce TLS 1.3 (version 4 in browser), which breaks up to 80% of websites.
-user_pref("security.tls.version.min", 4);
+// user_pref("security.tls.version.min", 4);
+// This configuration will be enforced in the future.
 
 // Disable IPv6, which is associated with many security risks.
 user_pref("network.dns.disableIPv6", true);
