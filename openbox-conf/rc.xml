@@ -417,16 +417,16 @@
     <keybind key="Super-C-Right">
       <action name="GrowToEdge"><direction>east</direction></action>
     </keybind>
-    <keybind key="S-C-Left">
+    <keybind key="A-C-Left">
       <action name="ShrinkToEdge"><direction>west</direction></action>
     </keybind>
-    <keybind key="S-C-Up">
+    <keybind key="A-C-Up">
       <action name="ShrinkToEdge"><direction>north</direction></action>
     </keybind>
-    <keybind key="S-C-Down">
+    <keybind key="A-C-Down">
       <action name="ShrinkToEdge"><direction>south</direction></action>
     </keybind>
-    <keybind key="S-C-Right">
+    <keybind key="A-C-Right">
       <action name="ShrinkToEdge"><direction>east</direction></action>
     </keybind>
     <keybind key="C-S-F10">
