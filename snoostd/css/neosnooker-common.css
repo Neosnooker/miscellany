@@ -1,5 +1,7 @@
 /**
- * snoostd/css/normalize.css
+ * neosnooker-common.css
+ * ---
+ * Contains CSS resets and declarations of several utility classes.
  */
 
 /**
@@ -119,4 +121,48 @@ blockquote,
 q {
   quotes: none;
   margin: 0;
+}
+
+/**
+ * Utility classes.
+ */
+
+@media screen and (min-width: 640px) {
+
+  .container,
+  .container-sm {
+    width: 600px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .container,
+  .container-md {
+    width: 720px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+
+  .container,
+  .container-lg {
+    width: 960px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+
+  .container,
+  .container-xl {
+    width: 1200px;
+  }
+}
+
+@media screen and (min-width: 1536px) {
+
+  .container,
+  .container-xxl {
+    width: 1440px;
+  }
 }
