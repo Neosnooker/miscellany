@@ -29,4 +29,8 @@ export interface WebserverConfiguration {
   specialPages: {
     notFoundFilename: string;
   };
+  /**
+   * The function to call when the server receives a connection.
+   */
+  requestEventCallback: (requestEvent: Deno.RequestEvent) => void;
 }

@@ -1,9 +1,10 @@
 import * as p from "https://deno.land/std@0.170.0/path/mod.ts";
+import { CommonMIMETypes } from "./CommonMIMETypes.ts";
 import { ContentStatus } from "./ContentStatus.ts";
 
 export class ContentManager {
   configuration;
-  record: Record<string, string> = {};
+  record: Record<string, string | Uint8Array> = {};
 
   constructor(configuration: {
     watchFs: boolean;
@@ -58,9 +59,9 @@ export class ContentManager {
         try {
           const isIndeedFile = isFile ?? Deno.lstatSync(path).isFile;
           if (isIndeedFile) {
-            const content = Deno.readTextFileSync(path);
-            const normalizedPath = p.join(route, p.relative(contentPath, path));
-            this.record[normalizedPath] = content;
+            const content = Deno.readFileSync(path);
+            const pathToSet = p.join(route, p.relative(contentPath, path));
+            this.record[pathToSet] = content;
           } else {
             const dirEntries = Deno.readDirSync(path);
             for (const entry of dirEntries) {
@@ -81,7 +82,7 @@ export class ContentManager {
     }
   }
 
-  async registerFsWatcher(paths: [string, string][]) {
+  registerFsWatcher(paths: [string, string][]) {
     paths.forEach(async (path) => {
       const fsWatcher = Deno.watchFs(path[0]);
 
@@ -89,10 +90,10 @@ export class ContentManager {
         switch (fsEvent.kind) {
           case "create":
           case "modify":
-            this.handleFsModification(path[1], fsEvent);
+            this.handleFsModification(path[1], fsEvent, path[0]);
             break;
           case "remove":
-            this.handleFsRemoval(path[1], fsEvent);
+            this.handleFsRemoval(path[1], fsEvent, path[0]);
             break;
           default:
             // Do nothing.
@@ -102,22 +103,29 @@ export class ContentManager {
     });
   }
 
-  private getPath(fsEvent: Deno.FsEvent) {
-    return fsEvent.paths.slice(fsEvent.paths.indexOf(".")).join("/");
+  private getPath(fsEvent: Deno.FsEvent, contentPath: string) {
+    const path = fsEvent.paths.join("/");
+    return path.slice(path.indexOf(contentPath));
   }
 
-  handleFsModification(route: string, fsEvent: Deno.FsEvent): void {
-    const path = this.getPath(fsEvent);
+  handleFsModification(
+    route: string,
+    fsEvent: Deno.FsEvent,
+    contentPath: string,
+  ): void {
+    const path = this.getPath(fsEvent, contentPath);
     try {
-      const content = Deno.readTextFileSync(path);
-      this.record[p.join(route, path)] = content;
+      const content = Deno.readFileSync(path);
+      const pathToSet = p.join(route, path);
+
+      this.record[pathToSet] = content;
     } catch {
       // Empty.
     }
   }
 
-  handleFsRemoval(route: string, fsEvent: Deno.FsEvent) {
-    delete this.record[p.join(route, this.getPath(fsEvent))];
+  handleFsRemoval(route: string, fsEvent: Deno.FsEvent, contentPath: string) {
+    delete this.record[p.join(route, this.getPath(fsEvent, contentPath))];
   }
 
   serveContent(urlPath: string) {

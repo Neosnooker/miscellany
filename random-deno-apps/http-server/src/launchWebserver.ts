@@ -13,6 +13,7 @@ export async function launchWebserver(
     "specialPages": {
       "notFoundFilename": "404.html",
     },
+    "requestEventCallback": (_) => {},
   } as WebserverConfiguration, configuration);
 
   const server = Deno.listen({ port: port });
@@ -33,23 +34,38 @@ export async function launchWebserver(
     const httpConn = Deno.serveHttp(conn);
 
     for await (const requestEvent of httpConn) {
+      actualConfiguration.requestEventCallback(requestEvent);
+
       const url = new URL(requestEvent.request.url);
 
       const body = contentMan.serveContent(
         url.pathname,
       );
 
-      requestEvent.respondWith(
-        new Response(body.content, {
-          "status": body.status,
-          "headers": {
-            "Content-Type": CommonMIMETypes[
-              (body.contentExtension ?? "TXT").toUpperCase()
-                .toUpperCase() as keyof typeof CommonMIMETypes
-            ],
-          },
-        }),
-      );
+      const contentType = CommonMIMETypes[
+        (body.contentExtension ?? "TXT").toUpperCase()
+          .toUpperCase() as keyof typeof CommonMIMETypes
+      ];
+
+      if (contentType.startsWith("text")) {
+        requestEvent.respondWith(
+          new Response(body.content, {
+            "status": body.status,
+            "headers": {
+              "Content-Type": contentType,
+            },
+          }),
+        );
+      } else {
+        requestEvent.respondWith(
+          new Response(body.content, {
+            "status": body.status,
+            "headers": {
+              "Content-Type": contentType,
+            },
+          }),
+        );
+      }
     }
   }
 }

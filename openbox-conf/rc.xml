@@ -328,10 +328,10 @@
     <keybind key="A-F4">
       <action name="Close"></action>
     </keybind>
-    <keybind key="S-A-F5">
+    <keybind key="S-F5">
       <action name="Maximize"></action>
     </keybind>
-    <keybind key="S-F5">
+    <keybind key="S-A-F5">
       <action name="Unmaximize"></action>
     </keybind>
     <keybind key="Super-F7">
