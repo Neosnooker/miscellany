@@ -4,20 +4,22 @@ import { WebserverConfiguration } from "./WebserverConfiguration.ts";
 
 export async function launchWebserver(
   port: number,
-  configuration:
-    & Partial<WebserverConfiguration>
-    & Pick<WebserverConfiguration, "path">,
+  configuration: Partial<WebserverConfiguration>,
 ) {
   const actualConfiguration = Object.assign({
     "watchFs": true,
     "assumeHtmlIfExtensionIsAbsent": true,
-  } as Exclude<WebserverConfiguration, "path">, configuration);
+    "contentPath": [[".", "/"]],
+    "specialPages": {
+      "notFoundFilename": "404.html",
+    },
+  } as WebserverConfiguration, configuration);
 
   const server = Deno.listen({ port: port });
 
   const contentMan = new ContentManager({
     watchFs: actualConfiguration.watchFs,
-    path: actualConfiguration.path,
+    paths: actualConfiguration.contentPath,
     assumeHtmlIfExtensionIsAbsent:
       actualConfiguration.assumeHtmlIfExtensionIsAbsent,
   });
@@ -31,8 +33,10 @@ export async function launchWebserver(
     const httpConn = Deno.serveHttp(conn);
 
     for await (const requestEvent of httpConn) {
+      const url = new URL(requestEvent.request.url);
+
       const body = contentMan.serveContent(
-        new URL(requestEvent.request.url).pathname,
+        url.pathname,
       );
 
       requestEvent.respondWith(
