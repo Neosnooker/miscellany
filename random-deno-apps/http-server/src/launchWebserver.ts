@@ -47,7 +47,7 @@ export async function launchWebserver(
           .toUpperCase() as keyof typeof CommonMIMETypes
       ];
 
-      if (contentType.startsWith("text")) {
+      try {
         requestEvent.respondWith(
           new Response(body.content, {
             "status": body.status,
@@ -56,15 +56,8 @@ export async function launchWebserver(
             },
           }),
         );
-      } else {
-        requestEvent.respondWith(
-          new Response(body.content, {
-            "status": body.status,
-            "headers": {
-              "Content-Type": contentType,
-            },
-          }),
-        );
+      } catch (e) {
+        console.warn(e);
       }
     }
   }

@@ -1,5 +1,4 @@
 import * as p from "https://deno.land/std@0.170.0/path/mod.ts";
-import { CommonMIMETypes } from "./CommonMIMETypes.ts";
 import { ContentStatus } from "./ContentStatus.ts";
 
 export class ContentManager {
