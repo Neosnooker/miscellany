@@ -1,3 +1,3 @@
-# random-deno-apps
+# deno-apps
 
 Random applications for Deno JavaScript runtime.

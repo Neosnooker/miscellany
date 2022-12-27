@@ -1,4 +1,5 @@
 import * as p from "https://deno.land/std@0.170.0/path/mod.ts";
+import { ContentErrors } from "./ContentErrors.ts";
 import { ContentStatus } from "./ContentStatus.ts";
 
 export class ContentManager {
@@ -185,14 +186,13 @@ export class ContentManager {
 
       return {
         "status": ContentStatus.INTERNAL_SERVER_ERROR,
-        "content":
-          "Record has no case sensitive match of the provided URL path, and there are multiple case insensitive matches.",
+        "content": ContentErrors.MULTIPLE_CI_MATCH,
       };
     }
 
     return {
       "status": ContentStatus.NOT_FOUND,
-      "content": "Content not found.",
+      "content": ContentErrors.NOT_FOUND,
     };
   }
 }

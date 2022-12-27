@@ -1,0 +1,165 @@
+/** Neosnooker's theme variables **/
+
+:root {
+  --theme-primary: #252d42;
+  --theme-secondary: #2b364f;
+  --theme-tertiary: #313d5b;
+  --theme-quaternary: #3a4868;
+  --theme-active: #4b5473;
+
+  --color-accent: #709bff;
+  --color-accent-secondary: #335299;
+  --color-accent-tertiary: #b3c9ff;
+
+  --color-red: #fa2014;
+  --color-blue: #1e95f1;
+  --color-light-blue: #1eaafa;
+  --color-cyan: #08ccfd;
+  --color-yellow: #feda10;
+  --color-gold: #febd1b;
+
+  --text-heading: #ebf0ff;
+  --text-subheading: #e1e6f5;
+  --text-normal: #dae0ed;
+  --text-muted: #c7cbd9;
+  --text-subtle: #b0b5bf;
+}
+
+/** Utility classes **/
+
+@media screen and (min-width: 640px) {
+  :root {
+    --breakpoint: 600px;
+  }
+
+  .container,
+  .container-sm {
+    width: var(--breakpoint);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --breakpoint: 720px;
+  }
+
+  .container,
+  .container-md {
+    width: var(--breakpoint);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :root {
+    --breakpoint: 960px;
+  }
+
+  .container,
+  .container-lg {
+    width: var(--breakpoint);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :root {
+    --breakpoint: 1200px;
+  }
+
+  .container,
+  .container-xl {
+    width: var(--breakpoint);
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  :root {
+    --breakpoint: 1440px;
+  }
+
+  .container,
+  .container-xxl {
+    width: var(--breakpoint);
+  }
+}
+
+/**
+ * Changes the font family to sans-serif fonts.
+ *
+ * var(--font-sans-serif, ""): The custom sans-serif fonts to use.
+ */
+.font-sans-serif,
+body {
+  font-family: var(--font-sans-serif);
+}
+
+/**
+ * Changes the font family to monospace fonts.
+ *
+ * var(--font-monospace, ""): The custom monospace fonts to use.
+ */
+.font-monospace,
+pre,
+samp,
+kbd,
+code {
+  font-family: var(--font-monospace);
+}
+
+/** Utility variables **/
+
+:root {
+  --font-sans-serif: 'Noto Sans', 'DejaVu Sans',
+    'Helvetica Neue',
+    Helvetica,
+    sans-serif;
+  --font-monospace: 'Noto Sans Mono',
+    'DejaVu Sans Mono',
+    'Andale Mono',
+    monospace;
+}
+
+/** Style **/
+
+body {
+  background-color: var(--theme-primary);
+  color: var(--text-normal);
+  font-size: 1.25rem;
+}
+
+a {
+  color: var(--color-blue);
+}
+
+a:hover {
+  color: var(--color-light-blue);
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 26px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 22px;
+}
+
+h6 {
+  font-size: 20px;
+}
+
+ul,
+ol,
+dd {
+  margin-left: 2rem;
+}
