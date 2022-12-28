@@ -1,28 +1,34 @@
 /** Neosnooker's theme variables **/
 
 :root {
-  --theme-primary: #252d42;
-  --theme-secondary: #2b364f;
-  --theme-tertiary: #313d5b;
-  --theme-quaternary: #3a4868;
-  --theme-active: #4b5473;
+  --theme-primary: #2b384f;
+  --theme-secondary: #32415c;
+  --theme-tertiary: #3a4b69;
+  --theme-quaternary: #3f5273;
+  --theme-active: #4e5c75;
 
-  --color-accent: #709bff;
-  --color-accent-secondary: #335299;
-  --color-accent-tertiary: #b3c9ff;
+  --color-accent: #70a4ff;
+  --color-accent-dark: #364b80;
+  --color-accent-complementary: #ffcb70;
 
-  --color-red: #fa2014;
-  --color-blue: #1e95f1;
-  --color-light-blue: #1eaafa;
-  --color-cyan: #08ccfd;
-  --color-yellow: #feda10;
-  --color-gold: #febd1b;
+  --text-heading: #f0f4fa;
+  --text-subheading: #e6e9f0;
+  --text-normal: #dce0ea;
+  --text-muted: #c5cbd8;
+  --text-subtle: #b0b7c4;
+}
 
-  --text-heading: #ebf0ff;
-  --text-subheading: #e1e6f5;
-  --text-normal: #dae0ed;
-  --text-muted: #c7cbd9;
-  --text-subtle: #b0b5bf;
+/** Utility variables **/
+
+:root {
+  --font-sans-serif: 'Noto Sans', 'DejaVu Sans',
+    'Helvetica Neue',
+    Helvetica,
+    sans-serif;
+  --font-monospace: 'Noto Sans Mono',
+    'DejaVu Sans Mono',
+    'Andale Mono',
+    monospace;
 }
 
 /** Utility classes **/
@@ -103,19 +109,6 @@ samp,
 kbd,
 code {
   font-family: var(--font-monospace);
-}
-
-/** Utility variables **/
-
-:root {
-  --font-sans-serif: 'Noto Sans', 'DejaVu Sans',
-    'Helvetica Neue',
-    Helvetica,
-    sans-serif;
-  --font-monospace: 'Noto Sans Mono',
-    'DejaVu Sans Mono',
-    'Andale Mono',
-    monospace;
 }
 
 /** Style **/
