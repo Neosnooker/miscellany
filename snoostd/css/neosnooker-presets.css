@@ -1,21 +1,21 @@
 /** Neosnooker's theme variables **/
 
 :root {
-  --theme-primary: #2b384f;
-  --theme-secondary: #32415c;
-  --theme-tertiary: #3a4b69;
-  --theme-quaternary: #3f5273;
-  --theme-active: #4e5c75;
+  --theme-blacker: #202c3b;
+  --theme-primary: #29374a;
+  --theme-secondary: #314259;
+  --theme-tertiary: #3a4e69;
+  --theme-quaternary: #415775;
+  --theme-active: #4e6582;
 
-  --color-accent: #6badff;
-  --color-accent-dark: #35567f;
-  --color-accent-complementary: #ff7d3f;
+  --color-accent: #6cbfff;
+  --color-accent-comp: #ffac6c;
 
-  --text-heading: #f0f4fa;
-  --text-subheading: #e6e9f0;
-  --text-normal: #dce0ea;
-  --text-muted: #c5cbd8;
-  --text-subtle: #b0b7c4;
+  --text-heading: #f7faff;
+  --text-subheading: #f0f4fa;
+  --text-normal: #eaeff7;
+  --text-muted: #ced3db;
+  --text-subtle: #b9c0cc;
 }
 
 /** Utility variables **/
